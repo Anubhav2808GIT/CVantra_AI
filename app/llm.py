@@ -1,21 +1,32 @@
 import os
 import requests
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
 
-OLLAMA_URL = os.getenv("OLLAMA_URL")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
 
 def ask_llm(prompt):
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY is not set. Please provide a Google Gemini API Key.")
+
     payload = {
-        "model": OLLAMA_MODEL,
-        "prompt": prompt,
-        "stream": False
+        "contents": [{
+            "parts": [{"text": prompt}]
+        }],
+        "generationConfig": {
+            "responseMimeType": "application/json"
+        }
     }
 
-    response = requests.post(OLLAMA_URL, json=payload, timeout=120)
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    response = requests.post(GEMINI_URL, headers=headers, json=payload, timeout=120)
     response.raise_for_status()
 
     data = response.json()
-    return data["response"]
+    return data["candidates"][0]["content"]["parts"][0]["text"]
