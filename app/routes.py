@@ -3,6 +3,7 @@ import json
 import re
 import shutil
 from datetime import datetime
+from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
@@ -130,8 +131,8 @@ async def analyze_resume(
 @router.post("/match-jd")
 async def match_resume_to_jd(
     jd: str = Form(...),
-    file: UploadFile | None = File(None),
-    resume_text: str | None = Form(None),
+    file: Optional[UploadFile] = File(None),
+    resume_text: Optional[str] = Form(None),
     db: Session = Depends(get_db),
 ):
     if file is None and (resume_text is None or not resume_text.strip()):
