@@ -119,7 +119,7 @@ Frontend runs at `http://localhost:5173` and calls the API using `VITE_API_BASE_
 ![Reports](screenshots/CVantra_Reports-Dashboard.png)
 
 ### ⚙️ FastAPI Swagger Docs
-![Swagger](screenshots/CVantra_Swagger-Api.png)
+![Swagger](screenshots/CVantra_Swagger-API.png)
 
 ---
 
