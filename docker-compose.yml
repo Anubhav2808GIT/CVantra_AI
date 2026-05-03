@@ -10,8 +10,9 @@ services:
     environment:
       # We will pass the API key from the environment
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - DB_PATH=/app/data/app.db
     volumes:
-      - app-db:/app/app.db
+      - app-db:/app/data
 
   frontend:
     build:
