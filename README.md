@@ -107,3 +107,7 @@ Frontend runs at `http://localhost:5173` and calls the API using `VITE_API_BASE_
 - Best results when the resume PDF contains selectable text (not scanned images).
 - All processing happens locally (LLM via Ollama), ideal for privacy-sensitive resume data.
 
+
+## Author
+Anubhav Sharma
+
